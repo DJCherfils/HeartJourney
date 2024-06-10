@@ -19,11 +19,26 @@ public class CollisionChecker {
 
         switch(entity.direction){
             case "up":
-                entityTopRow = (entity)
+                entityTopRow = (entityTopWorldY - entity.speed)/gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+                    entity.collisionOn = true;
+                }
+
+            case "down":
+                entityTopRow = (entityTopWorldY - entity.speed)/gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+                    entity.collisionOn = true;
+                }
         }
+
+    }
 
 
 
 
     }
-}
+

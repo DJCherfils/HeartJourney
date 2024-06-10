@@ -25,7 +25,10 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSettler asettler = new AssetSettler(this);
     public Player player = new Player(this, keyH);
+    public Entity[] npc = new Entity[10];
+    public SuperObject obj[] = new SuperObject[10];
 
 
     public GamePanel(){
@@ -39,6 +42,9 @@ public class GamePanel extends JPanel implements Runnable{
     public void startGamethread(){
         gameThread  = new Thread(this);
         gameThread.start();
+    }
+    public void setupGame(){
+        asettler.setNPC();
     }
     @Override
     public void run() {
@@ -79,6 +85,14 @@ public class GamePanel extends JPanel implements Runnable{
         tileM.draw(g2);
 
         player.draw(g2);
+
+
+        for(int i = 0; i < npc.length; i++){
+            if(npc[i] != null){
+                npc[i].draw(g2);
+            }
+        }
+
         g2.dispose();
     }
 }
