@@ -66,11 +66,6 @@ public class UI {
             drawPlayerLife();
             drawDialogueScreen();
         }
-//CHARACTER
-        if(gp.gameState == gp.characterState){
-            drawCharacterScreen();
-            drawInventory();
-        }
     }
     public void drawPlayerLife(){
         int x = gp.tileSize/2;
@@ -111,7 +106,7 @@ public class UI {
         for(int i = 0; i < message.size(); i++){
             if(message.get(i) != null) {
 
-                g2.setColor(Color.BLACK);
+                g2.setColor(Color.RED);
                 g2.drawString(message.get(i), messageX+2, messageY+2);
                 g2.setColor(Color.WHITE);
                 g2.drawString(message.get(i), messageX, messageY);
@@ -130,10 +125,10 @@ public class UI {
     }
     public void drawTitleScreen(){
         if(titleScreenState == 0) {
-            g2.setColor(new Color(13, 54, 200));
+            g2.setColor(new Color(18, 27, 70));
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64));
-            String text = "Blue Boy Adventure";
+            String text = "The Trials of Love";
             int x = getXForCenteredText(text);
             int y = gp.tileSize * 5 / 2;
             //SHADOW TEXT
@@ -142,21 +137,21 @@ public class UI {
             //MAIN TEXT
             g2.setColor(Color.WHITE);
             g2.drawString(text, x, y);
-            //BLUE BOY IMAGE
+
             x = gp.screenWidth / 2 - gp.tileSize * 3 / 2;
             y += gp.tileSize;
             g2.drawImage(gp.player.down1, x, y, gp.tileSize * 5 / 2, gp.tileSize * 5 / 2, null);
-            //MENU
+
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 
-            text = "NEW GAME";
+            text = "New Game";
             x = getXForCenteredText(text);
             y += gp.tileSize * 4;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
-            text = "LOAD GAME";
+            text = "Load Game";
             x = getXForCenteredText(text);
             y += gp.tileSize * 3 / 2;
             g2.drawString(text, x, y);
@@ -164,7 +159,7 @@ public class UI {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
-            text = "QUIT";
+            text = "Quit";
             x = getXForCenteredText(text);
             y += gp.tileSize * 3 / 2;
             g2.drawString(text, x, y);
@@ -177,7 +172,7 @@ public class UI {
             g2.setColor(Color.WHITE);
             g2.setFont(g2.getFont().deriveFont(42F));
 
-            String text = "Select your class!";
+            String text = "What are you?";
             int x = getXForCenteredText(text);
             int y = gp.tileSize*3;
             g2.drawString(text,x,y);
@@ -190,7 +185,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
-            text = "Thief";
+            text = "Farmer";
             x = getXForCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text,x,y);
@@ -299,24 +294,6 @@ public class UI {
         int slotY = slotYstart;
         int slotSize = gp.tileSize + 3;
 
-        //DRAW PLAYER ITEMS
-        for (int i = 0; i < gp.player.inventory.size(); i++) {
-
-            if(gp.player.inventory.get(i) == gp.player.currentWeapon ||
-                    gp.player.inventory.get(i) == gp.player.currentShield) {
-                g2.setColor(new Color(240,190,90));
-                g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
-            }
-
-            g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
-
-            slotX += slotSize;
-            if (i == 4 || i == 9 || i == 14) {
-                slotX = slotXstart;
-                slotY += slotSize;
-            }
-        }
-
         //FIND CURSOR LOCATION
         int cursorX = slotXstart + (slotSize * slotCol);
         int cursorY = slotYstart + (slotSize * slotRow);
@@ -335,8 +312,7 @@ public class UI {
         return itemIndex;
     }
     public void drawSubWindow(int x,int y,int width,int height){
-
-        Color c = new Color(0,0,0, 175);
+        Color c = new Color(11, 21, 77, 255);
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, gp.tileSize/2,gp.tileSize/2);
 
